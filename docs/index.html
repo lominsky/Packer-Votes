@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-database.js"></script>
+	<script src="https://apis.google.com/js/api.js"></script>
+	<title>Packer Votes</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="assets/css/dashboard.css" rel="stylesheet">
+	<!-- Personal Styling -->
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+	<div class="container" id="login">
+		<button type="button" class="btn btn-dark" onclick="login()">Login</button>
+	</div>
+
+	<div class="container" id="address">
+		<div class="row mb-3">
+			This site does not store your address. It's used to find the candidates that would appear on your ballot.
+		</div>
+
+	  <div class="row">
+	  	<div class="col-sm">
+		  	<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text" id="basic-addon1">Home Address</span>
+			  </div>
+			  <input type="text" class="form-control" placeholder="170 Joralemon Street" aria-label="Address" aria-describedby="basic-addon1">
+			</div>
+		</div>
+
+	  	<div class="col-sm">
+		  	<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text" id="basic-addon2">Zip Code</span>
+			  </div>
+			  <input type="text" class="form-control" placeholder="11201" aria-label="Zip" aria-describedby="basic-addon2">
+			</div>
+		</div>
+
+		<div class="col-sm">
+		  	<button type="button" class="btn btn-dark" onclick="getAddress()">Get Your Ballot</button>
+		</div>
+	  </div>
+	</div>
+
+	<div class="container" id="ballot"></div>
+	<div class="container" id="voted">
+		<div id="stopVoting" class="alert alert-info hidden" role="alert">I love your enthusiasm, but you can only vote once.</div>
+		<p>If you're registered to vote, make sure you do so! If not, check out the links above for information on registering and more.</p>
+		<br>
+		<div id="realVoting" class="row">
+			<div class="col-sm" id="earlyVoting"></div>
+			<div class="col-sm" id="electionDay"></div>
+		</div>
+	</div>
+</body>
+
+<!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="assets/js/jquery-3.2.1.slim.min.js"></script>
+  <script src="assets/js/popper.min.js"></script>
+  <script src="assets/js/bootstrap.min.js"></script>
+
+  <!-- Bootstrap Autocomplete -->
+  <script src="assets/js/bootstrap-autocomplete.min.js"></script>
+
+  <!-- Icons -->
+  <script src="assets/js/feather.min.js"></script>
+  <script>
+    feather.replace()
+  </script>
+  
+  <script src="assets/js/script.js" defer></script>
+</html>
+
