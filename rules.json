@@ -1,0 +1,32 @@
+{
+  "rules": {
+    "admin": {
+      ".read": "auth.token.email.matches(/.*@packer.edu$/)",
+      ".write": "false"
+    },
+    "$electionId": {
+      "$electionName": {
+        "races": {
+          ".read": "auth.token.email.matches(/.*@packer.edu$/) && 
+          root.child($electionId).child('hasVoted').child(auth.uid).exists() == false",
+          "$title": {
+            "$district": {
+              "$candidate": {
+                ".write": "auth.token.email.matches(/.*@packer.edu$/) && 
+                  root.child($electionId).child('hasVoted').child(auth.uid).exists() == false",
+                ".validate": "data.exists() ? newData.val() == data.val() + 1 : newData.val() == 1"
+              }
+            }
+          }
+        }
+      },
+      "hasVoted": {
+        ".read": "auth.token.email.matches(/.*@packer.edu$/)",
+        "$uid": {
+          ".write": "auth.token.email.matches(/.*@packer.edu$/) && 
+          $uid == auth.uid && data.exists() == false"
+        }
+      }
+    }
+  }
+}
