@@ -49,6 +49,8 @@
       console.log(electionId);
       firebase.database().ref(electionId).once('value', snapshot => {
         console.log(snapshot.val())
+      }, err => {
+        if(err) console.log(err);
       });
     }
   
