@@ -43,12 +43,50 @@
     firebase.initializeApp(firebaseConfig);
 
     function onload() {
+      let results = $("#results");
       let electionId = location.hash;
       if(electionId.length < 2) return false;
       electionId = electionId.substring(1);
-      console.log(electionId);
       firebase.database().ref(electionId).once('value', snapshot => {
-        console.log(snapshot.val())
+        let data = snapshot.val();
+        let electionName = "";
+        let voters = 0;
+        for(let i in data) {
+          if(i == "hasVoted") {
+            voters = Object.keys(data[i]).length;
+          } else {
+            electionName = i;
+          }
+        }
+        results.append($("<h1>Packer's " + electionName + " Results</h1>"));
+        results.append($("<h5>Packer's mock-election had " + voters + " voters</h5>"));
+
+        let races = data[electionName].races;
+        for(let race in races) {
+          let r = races[race];
+          results.append($("<hr><h3>" + race + "</h3>"));
+          for(let district in r) {
+            let d = r[district];
+            results.append($("<h5>" + district + "</h5>")); 
+            for(let i in d) {
+              d[i] = {
+                name: i,
+                votes: d[i]
+              }
+            }
+            let candidates = Object.values(d).sort((a,b) => {
+              return b.votes - a.votes;
+            });
+
+            let list = $("<ul></ul>"); 
+            for(let c of candidates) {
+              list.append($("<li>" + c.name + ": " + c.votes + "</li>"))
+            }
+            results.append(list);
+          }
+        }
+
+        results.show();
       }, err => {
         if(err) console.log(err);
       });
