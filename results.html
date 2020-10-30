@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-database.js"></script>
+  <title>Packer Votes</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="assets/css/dashboard.css" rel="stylesheet">
+    <!-- Personal Styling -->
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body onload="onload()">
+
+  <div class="container" id="results"></div>
+</body>
+
+<!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="assets/js/jquery-3.2.1.slim.min.js"></script>
+  <script src="assets/js/popper.min.js"></script>
+  <script src="assets/js/bootstrap.min.js"></script>
+
+  <!-- Bootstrap Autocomplete -->
+  <script src="assets/js/bootstrap-autocomplete.min.js"></script>
+
+  <!-- Icons -->
+  <!-- <script src="assets/js/feather.min.js"></script> -->
+  <script>
+      var firebaseConfig = {
+        apiKey: "AIzaSyAjR6XezCEP-xW59vZw9t7NqnOFyPCExcs",
+        authDomain: "vote-f0ad8.firebaseapp.com",
+        databaseURL: "https://vote-f0ad8.firebaseio.com",
+        projectId: "vote-f0ad8",
+        storageBucket: "vote-f0ad8.appspot.com",
+        messagingSenderId: "748516822805",
+        appId: "1:748516822805:web:6ac2f07d616298eeea631c"
+      };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    function onload() {
+      let electionId = location.hash;
+      if(electionId.length < 2) return false;
+      electionId = electionId.substring(1);
+      console.log(electionId);
+      firebase.database().ref(electionId).once('value', snapshot => {
+        console.log(snapshot.val())
+      });
+    }
+  
+  </script>
+  
+</html>
