@@ -30,7 +30,7 @@ firebase.auth().onAuthStateChanged(function(u) {
     firebase.database().ref("admin").once('value', snapshot => {
       loadClient(snapshot.val().api);
       electionId = snapshot.val().electionId;
-      console.log("FOUND THE ELECTION ID! IT IS: " + electionId);
+      // console.log("FOUND THE ELECTION ID! IT IS: " + electionId);
 
       firebase.database().ref(electionId + "/hasVoted/" + user.uid).once('value', snapshot => {
         if(snapshot.val() == null) {
